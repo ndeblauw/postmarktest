@@ -27,3 +27,14 @@ Route::get('mail', function() {
 
     \Illuminate\Support\Facades\Mail::to($dummy)->send(new \App\Mail\TestMail());
 });
+
+Route::get('markdown', function() {
+    $dummy = App\Models\User::firstOrCreate([
+        'email'=> 'dummy@dummy.du',
+    ],[
+        'name' => 'dummy',
+        'password' => \Illuminate\Support\Facades\Hash::make('password'),
+    ]);
+
+    \Illuminate\Support\Facades\Mail::to($dummy)->send(new \App\Mail\TestMailMarkdown());
+});
