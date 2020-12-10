@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('mail', function() {
+    $dummy = App\Models\User::firstOrCreate([
+        'email'=> 'dummy@dummy.du',
+        ],[
+        'name' => 'dummy',
+        'password' => \Illuminate\Support\Facades\Hash::make('password'),
+    ]);
+
+    \Illuminate\Support\Facades\Mail::to($dummy)->send(new \App\Mail\TestMail());
+});
